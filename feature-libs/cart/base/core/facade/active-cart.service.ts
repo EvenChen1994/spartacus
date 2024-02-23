@@ -161,6 +161,12 @@ export class ActiveCartService implements ActiveCartFacade, OnDestroy {
     );
   }
 
+  startBundle(userId: string, cartId: string): void {
+    if (userId && cartId) {
+      this.multiCartFacade.startBundle(userId, cartId);
+    }
+  }
+
   /**
    * Waits for the cart to be stable before returning the active cart's ID.
    */

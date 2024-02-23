@@ -237,6 +237,15 @@ export class MultiCartService implements MultiCartFacade {
     );
   }
 
+  startBundle(userId: string, cartId: string): void {
+    this.store.dispatch(
+      new CartActions.CartStartBundle({
+        userId,
+        cartId
+      })
+    );
+  }
+
   /**
    * Add multiple entries to cart
    *

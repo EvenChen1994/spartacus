@@ -46,6 +46,16 @@
         >
           {{ 'quickOrderCartForm.add' | cxTranslate }}
         </button>
+
+        <button
+          [class.disabled]="cartIsLoading$ | async"
+          [disabled]="cartIsLoading$ | async"
+          class="btn btn-block btn-action apply-quick-order-button"
+          type="button"
+          (click)="startBundle(cart)"
+        >
+          Start Bundle
+        </button>
         <cx-form-errors
           [control]="quickOrderForm.get('productCode')"
         ></cx-form-errors>

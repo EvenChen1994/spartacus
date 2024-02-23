@@ -25,6 +25,7 @@ export const defaultOccCartConfig: OccConfig = {
         saveCart:
           '/users/${userId}/carts/${cartId}/save?saveCartName=${saveCartName}&saveCartDescription=${saveCartDescription}',
         validate: 'users/${userId}/carts/${cartId}/validate?fields=DEFAULT',
+        bundle: 'users/${userId}/carts/${cartId}/bundles',
         /* eslint-enable */
       },
     },

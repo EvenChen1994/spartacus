@@ -168,4 +168,13 @@ export class CartQuickOrderFormComponent implements OnInit, OnDestroy {
   protected resetForm(): void {
     this.quickOrderForm.reset();
   }
+
+  public startBundle(cart: Cart) {
+    console.log(`start bunddle on cart ${cart.code}`);
+    if (this.activeCartService) {
+      this.activeCartService.startBundle('anonymous', cart.guid || "");
+    } else {
+      console.error(`this.activeCartService.startBundle is not defined`);
+    }
+  }
 }

@@ -26,6 +26,7 @@ import { Cart, OrderEntry } from '../models/cart.model';
         'getLoading',
         'isStable',
         'addEntry',
+        'startBundle',
         'removeEntry',
         'updateEntry',
         'getEntry',
@@ -93,6 +94,14 @@ export abstract class ActiveCartFacade {
    * @param quantity
    */
   abstract addEntry(productCode: string, quantity: number): void;
+
+  /**
+   * Start bundle
+   *
+   * @param userId
+   * @param cartId
+   */
+  abstract startBundle(userId: string, cartId: string): void;
 
   /**
    * Remove entry

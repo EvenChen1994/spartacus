@@ -26,6 +26,34 @@ export class CartEntryEffects {
     )
   );
 
+  startBundle$: Observable<any> = createEffect(() =>
+      this.actions$.pipe(
+        ofType(CartActions.CART_START_BUNDLE),
+        map((action: CartActions.CartStartBundle) => action.payload),
+        concatMap((payload) => {
+          return this.cartEntryConnector
+            .bundle(payload.userId, payload.cartId)
+            .pipe(
+              map(
+                (cartModification: CartModification) =>
+                  new CartActions.CartStartBundleSuccess({
+                    ...payload,
+                    ...(cartModification as Required<CartModification>),
+                })
+              ),
+              catchError((error) =>
+              from([
+                new CartActions.CartStartBundleFail({
+                  ...payload,
+                  error: normalizeHttpError(error),
+                }),
+              ])
+            )
+            )
+        })
+      )
+  );
+
   addEntry$: Observable<
     | CartActions.CartAddEntrySuccess
     | CartActions.CartAddEntryFail
@@ -146,5 +174,5 @@ export class CartEntryEffects {
   constructor(
     private actions$: Actions,
     private cartEntryConnector: CartEntryConnector
-  ) {}
+  ) { }
 }

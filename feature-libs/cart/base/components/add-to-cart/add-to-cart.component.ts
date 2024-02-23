@@ -78,6 +78,7 @@ export class AddToCartComponent implements OnInit, OnDestroy {
       this.productCode = this.product.code ?? '';
       this.setStockInfo(this.product);
       this.cd.markForCheck();
+      console.log("Product " + this.productCode + " initilized");
     } else if (this.productCode) {
       // force hasStock and quantity for the time being, as we do not have more info:
       this.quantity = 1;

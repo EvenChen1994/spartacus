@@ -66,14 +66,18 @@ export class OccProductSearchAdapter implements ProductSearchAdapter {
     query: string,
     searchConfig: SearchConfig
   ): string {
-    return this.occEndpoints.buildUrl('productSearch', {
+    const endpoint = this.occEndpoints.buildUrl('productSearch', {
       queryParams: { query, ...searchConfig },
     });
+    console.log("search endpoint: " + endpoint);
+    return endpoint;
   }
 
   protected getSuggestionEndpoint(term: string, max: string): string {
-    return this.occEndpoints.buildUrl('productSuggestions', {
+    const endpoint = this.occEndpoints.buildUrl('productSuggestions', {
       queryParams: { term, max },
     });
+    console.log("getSuggestionEndpoint endpoint: " + endpoint);
+    return endpoint;
   }
 }

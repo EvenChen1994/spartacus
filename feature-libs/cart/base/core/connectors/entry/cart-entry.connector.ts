@@ -24,6 +24,10 @@ export class CartEntryConnector {
     return this.adapter.add(userId, cartId, productCode, quantity);
   }
 
+  public bundle(userId: string, cartId: string): Observable<any> {
+    return this.adapter.bundle(userId, cartId);
+  }
+
   public update(
     userId: string,
     cartId: string,

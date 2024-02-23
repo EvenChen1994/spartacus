@@ -18,6 +18,9 @@ export const CART_REMOVE_ENTRY_FAIL = '[Cart-entry] Remove Entry Fail';
 export const CART_UPDATE_ENTRY = '[Cart-entry] Update Entry';
 export const CART_UPDATE_ENTRY_SUCCESS = '[Cart-entry] Update Entry Success';
 export const CART_UPDATE_ENTRY_FAIL = '[Cart-entry] Update Entry Fail';
+export const CART_START_BUNDLE = '[Cart-entry] Start Bundle';
+export const CART_START_BUNDLE_SUCCESS = '[Cart-entry] Start Bundle Success';
+export const CART_START_BUNDLE_FAIL = '[Cart-entry] Start Bundle Fail';
 
 export class CartAddEntry extends StateUtils.EntityProcessesIncrementAction {
   readonly type = CART_ADD_ENTRY;
@@ -27,6 +30,43 @@ export class CartAddEntry extends StateUtils.EntityProcessesIncrementAction {
       userId: string;
       productCode: string;
       quantity: number;
+    }
+  ) {
+    super(MULTI_CART_DATA, payload.cartId);
+  }
+}
+
+export class CartStartBundle extends StateUtils.EntityProcessesIncrementAction {
+  readonly type = CART_START_BUNDLE;
+  constructor(
+    public payload: {
+      cartId: string;
+      userId: string;
+    }
+  ) {
+    super(MULTI_CART_DATA, payload.cartId);
+  }
+}
+
+export class CartStartBundleSuccess extends StateUtils.EntityProcessesIncrementAction {
+  readonly type = CART_START_BUNDLE_SUCCESS;
+  constructor(
+    public payload: {
+      cartId: string;
+      userId: string;
+    }
+  ) {
+    super(MULTI_CART_DATA, payload.cartId);
+  }
+}
+
+export class CartStartBundleFail extends StateUtils.EntityProcessesIncrementAction {
+  readonly type = CART_START_BUNDLE_FAIL;
+  constructor(
+    public payload: {
+      cartId: string;
+      userId: string;
+      error: any;
     }
   ) {
     super(MULTI_CART_DATA, payload.cartId);

@@ -32,6 +32,8 @@ export class OccCartEntryAdapter implements CartEntryAdapter {
       urlParams: { userId, cartId, quantity },
     });
 
+    console.log(`${userId} add product ${productCode} to cart ${cartId}`);
+
     // Handle b2b case where the x-www-form-urlencoded is still used
     if (url.includes(`quantity=${quantity}`)) {
       const httpHeaders = new HttpHeaders({
@@ -59,6 +61,49 @@ export class OccCartEntryAdapter implements CartEntryAdapter {
     return this.http
       .post<CartModification>(url, toAdd, { headers })
       .pipe(this.converterService.pipeable(CART_MODIFICATION_NORMALIZER));
+  }
+
+  public bundle(
+    userId: string,
+    cartId: string,
+    quantity: number = 1
+  ): Observable<any> {
+    const url = this.occEndpointsService.buildUrl('bundle', {
+      urlParams: { userId, cartId },
+    });
+
+    console.log('srat bundle request');
+    console.log('send request to ' + url);
+
+    // Handle b2b case where the x-www-form-urlencoded is still used
+    if (url.includes(`quantity=${quantity}`)) {
+      const httpHeaders = new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+      });
+
+      return this.http
+        .post<CartModification>(
+          url,
+          {
+            templeteId: 'StarterDSLRComponent',
+            productCode: '1382080',
+            quantity
+          },
+          { headers: httpHeaders }
+        );
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    return this.http
+      .post<CartModification>(url, {
+        templateId: 'StarterDSLRComponent',
+        productCode: '1382080',
+        quantity
+      }, { headers });
+
   }
 
   public update(
@@ -102,6 +147,8 @@ export class OccCartEntryAdapter implements CartEntryAdapter {
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
+
+    console.log(`${userId} remove entry ${entryNumber} from cart ${cartId}`);
 
     const url = this.occEndpointsService.buildUrl('removeEntries', {
       urlParams: {

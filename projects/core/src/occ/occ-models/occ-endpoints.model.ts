@@ -272,4 +272,6 @@ export interface OccEndpoints {
    * @member {string}
    */
   getActiveCostCenters?: string | OccEndpoint;
+
+  bundle?: string | OccEndpoint;
 }

@@ -23,6 +23,11 @@ export abstract class CartEntryAdapter {
     quantity?: number
   ): Observable<CartModification>;
 
+  abstract bundle(
+    userId: string,
+    cartId: string
+  ): Observable<any>;
+
   /**
    * Abstract method used to update entry in cart
    * @param userId
